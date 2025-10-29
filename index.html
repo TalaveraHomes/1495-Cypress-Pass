@@ -2,85 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to Your Talavera Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>1495 Cypress Pass • Talavera Homes</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background: #fffdf9; color: #1f1f1f; }
-    header {
-      position: relative; height: 90vh;
-      background: url('195410.jpeg') no-repeat center center/cover;
-      display: flex; justify-content: center; align-items: center;
-      text-align: center; color: white; flex-direction: column;
+    :root{
+      --ink:#1f1f1f; --nav:#c0802c; --navHover:#000050; --brand:#000050; --paper:#fffdf9;
+      --card:#fff; --line:#eee5d9;
     }
-    header::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,80,.25); }
-    header .content { position: relative; z-index: 1; background: rgba(192,128,44,.60); padding: 1rem 2rem; border-radius: 8px; }
-    header a.logo-link { position: absolute; top: 20px; left: 20px; z-index: 2; }
-    header img.logo { height: 100px; }
+    *{box-sizing:border-box}
+    body{font-family:'Roboto',sans-serif;margin:0;color:var(--ink);background:var(--paper)}
 
-    nav { display: flex; flex-wrap: wrap; justify-content: center; background: #c0802c; isolation: isolate; }
-    nav a { color: #fff; text-decoration: none; padding: 1rem; font-weight: bold; transition: background .3s; }
-    nav a:hover { background: #000050; }
-
-    .container section { display: none; padding: 2rem; max-width: 1100px; margin: auto; }
-    .container section.active { display: block; }
-    h2 { color: #000050; margin-top: 0; }
-    ul { list-style: none; padding: 0; }
-    ul li { padding: .5rem 0; }
-
-    .pdf-frame { width: 100%; height: 80vh; border: none; background: #fff; box-shadow: 0 0 0 1px #eee inset; }
-
-    .contact-links a, .referral-form button {
-      display: inline-block; margin: 0.5rem 1rem 0.5rem 0; padding: 0.75rem 1.5rem;
-      background: #000050; color: white; text-decoration: none; border-radius: 6px; font-weight: bold;
-      transition: background 0.3s; border: 0; cursor: pointer;
+    header{
+      position:relative;height:90vh;display:flex;align-items:center;justify-content:center;
+      text-align:center;color:#fff;background:#222 center/cover no-repeat;
     }
-    .contact-links a:hover, .referral-form button:hover { background: #c0802c; }
+    header::before{content:"";position:absolute;inset:0;background:rgba(0,0,80,.25)}
+    header .content{position:relative;z-index:1;background:rgba(192,128,44,.60);padding:1rem 2rem;border-radius:8px}
+    header a.logo-link{position:absolute;top:20px;left:20px;z-index:2}
+    header img.logo{height:100px;display:block}
 
-    footer { background: #000050; color: #fff; text-align: center; padding: 1rem; }
-    form input, form textarea { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    nav{display:flex;flex-wrap:wrap;justify-content:center;background:var(--nav)}
+    nav a{color:#fff;text-decoration:none;padding:1rem;font-weight:700}
+    nav a:hover{background:var(--navHover)}
 
-    /* --- Selections gallery styles --- */
-    .selections-toolbar { display: flex; gap: .75rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
-    .chip { display: inline-block; padding: .4rem .8rem; border-radius: 999px; border: 1px solid #e0d7c9; background: #fffaf2; font-weight: 700; color: #000050; }
-    .muted { color: #5a5a5a; font-size: .95rem; }
+    .container section{display:none;max-width:1100px;margin:auto;padding:2rem}
+    .container section.active{display:block}
+    h2{color:var(--brand);margin-top:0}
 
-    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .card {
-      background: #ffffff; border: 1px solid #eee5d9; border-radius: 12px; overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,.04); display: flex; flex-direction: column;
-      transition: transform .2s ease, box-shadow .2s ease;
+    .pdf-frame{width:100%;height:80vh;border:0;background:#fff;box-shadow:0 0 0 1px #eee inset}
+
+    .contact-links a,.referral-form button{
+      display:inline-block;margin:.5rem 1rem .5rem 0;padding:.75rem 1.25rem;
+      background:var(--brand);color:#fff;text-decoration:none;border-radius:6px;font-weight:700;border:0;cursor:pointer
     }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.06); }
-    .thumb { position: relative; width: 100%; height: 160px; background: #f5f2ed; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .thumb .overlay {
-      position: absolute; inset: 0;
-      background: rgba(0,0,0,.45);
-      color: #fff; opacity: 0; transition: opacity .2s ease;
-      display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px;
-      font-weight: 700; line-height: 1.35;
-    }
-    .card:hover .overlay { opacity: 1; }
-    .placeholder { font-weight: 700; color: #000050; text-transform: uppercase; font-size: 0.95rem; padding: 0 10px; text-align: center; }
+    .contact-links a:hover,.referral-form button:hover{background:var(--nav)}
 
-    .info { padding: 12px 14px 14px; }
-    .title { font-weight: 700; color: #000050; margin: 0 0 6px; }
-    .links a { font-size: .92rem; color: #000050; text-decoration: none; border-bottom: 1px dashed #000050; }
-    .links a:hover { color: #c0802c; border-bottom-color: #c0802c; }
+    footer{background:var(--brand);color:#fff;text-align:center;padding:1rem}
 
-    .selections-list { margin-top: 1.5rem; border-top: 1px solid #eee5d9; padding-top: 1rem; }
-    .selections-list li { padding: .4rem 0; border-bottom: 1px dashed #eee5d9; }
+    form input,form textarea{width:100%;padding:.75rem;margin:.75rem 0;border:1px solid #ccc;border-radius:4px}
+
+    /* selections UI */
+    .selections-toolbar{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
+    .chip{display:inline-block;padding:.4rem .8rem;border-radius:999px;border:1px solid var(--line);background:#fffaf2;font-weight:700;color:var(--brand)}
+    .muted{color:#5a5a5a;font-size:.95rem}
+
+    .gallery{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+    .thumb{position:relative;height:160px;background:#f5f2ed;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb .overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);color:#fff;opacity:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-weight:700;transition:opacity .15s}
+    .card:hover .overlay{opacity:1}
+    .placeholder{font-weight:700;color:var(--brand);text-transform:uppercase;font-size:.95rem;padding:0 10px;text-align:center}
+    .info{padding:12px 14px 14px}
+    .title{font-weight:700;color:var(--brand);margin:0 0 6px}
+    .links a{font-size:.92rem;color:var(--brand);text-decoration:none;border-bottom:1px dashed var(--brand)}
+    .links a:hover{color:var(--nav);border-bottom-color:var(--nav)}
+    .selections-list{margin-top:1.25rem;border-top:1px solid var(--line);padding-top:1rem}
+    .selections-list li{padding:.4rem 0;border-bottom:1px dashed var(--line)}
   </style>
 </head>
 <body>
-  <header>
-    <a href="./" class="logo-link">
-      <img src="Gold_Talavera_Logo.png" alt="Talavera Homes Logo" class="logo">
+
+  <header id="hero">
+    <a href="./" class="logo-link" aria-label="Talavera Homes">
+      <img id="logoImg" src="" alt="Talavera Homes Logo" class="logo">
     </a>
     <div class="content">
       <h1>Welcome to Your New Talavera Home</h1>
-      <p>From our family to yours — thank you for choosing Talavera Homes. We're honored to have built the place you'll call home.</p>
+      <p>From our family to yours — thank you for choosing Talavera Homes.</p>
     </div>
   </header>
 
@@ -94,10 +86,12 @@
   </nav>
 
   <div class="container">
-    <section id="handbook">
+    <section id="handbook" class="active">
       <h2>Homeowner Handbook</h2>
-      <iframe class="pdf-frame" src="Talavera%20Homes%20Homeowner%20Handbook.pdf#view=FitH&toolbar=1&navpanes=0" title="Talavera Homes Homeowner Handbook"></iframe>
-      <p style="margin-top:1rem;">Having trouble viewing? <a href="Talavera%20Homes%20Homeowner%20Handbook.pdf">Open the PDF directly</a>.</p>
+      <iframe class="pdf-frame" id="handbookFrame" src="" title="Talavera Homes Homeowner Handbook"></iframe>
+      <p style="margin-top:1rem;">Having trouble viewing?
+        <a id="handbookLink" href="">Open the PDF directly</a>.
+      </p>
     </section>
 
     <section id="referral">
@@ -117,12 +111,13 @@
       <h2>Home Selections</h2>
       <div class="selections-toolbar">
         <span class="chip">Your chosen finishes & fixtures</span>
-        <span class="muted">hover over tile to see description and click “Details” for link to product information</span>
+        <span class="muted">Hover a tile to see the note. Click “Details” for product info.</span>
       </div>
 
       <div id="selectionsGallery" class="gallery"></div>
       <ul id="selectionsList" class="selections-list"></ul>
-      <p class="muted" style="margin-top:1rem;">Images can be <code>.jpg</code>, <code>.jpeg</code>, or <code>.png</code>. The code tries root and <code>/selections/</code> automatically.</p>
+      <p class="muted" style="margin-top:1rem;">You can place images in the repo **root** or in **/selections/**. Any of
+        <code>.jpg</code>, <code>.jpeg</code>, or <code>.png</code> (any capitalization) will be found automatically.</p>
     </section>
 
     <section id="tips"><h2>Helpful Tips</h2><p>Coming soon.</p></section>
@@ -135,15 +130,14 @@
         <a href="mailto:service@talavera-homes.com">✉️ Email Us</a>
       </div>
       <p><strong>Phone:</strong> 210-900-3353<br>
-        <strong>Text:</strong> 210-900-3353<br>
-        <strong>Email:</strong> service@talavera-homes.com</p>
+         <strong>Text:</strong> 210-900-3353<br>
+         <strong>Email:</strong> service@talavera-homes.com</p>
     </section>
   </div>
 
   <footer>&copy; 2025 Talavera Homes. All rights reserved.</footer>
 
-  <!-- Inline JSON: keep your data here. If any image paths are just filenames (like "carpet.png"),
-      this script now tries both "./carpet.png" and "selections/carpet.png". -->
+  <!-- Your selections data (filenames can be any case and any of .jpg/.jpeg/.png) -->
   <script type="application/json" id="selections-data">[
     { "name": "Exterior Paint", "note": "Sherwin Williams SW7005 Pure White", "link": "https://www.sherwin-williams.com/en-us/color/color-family/white-paint-colors/sw7005-pure-white", "image": "exterior-paint.jpg" },
     { "name": "Exterior Trim", "note": "Sherwin Williams SW7005 Pure White", "link": "https://www.sherwin-williams.com/en-us/color/color-family/white-paint-colors/sw7005-pure-white", "image": "exterior-trim.jpg" },
@@ -159,164 +153,181 @@
     { "name": "Dishwasher", "note": "GE Built-in Tall Tub SS w/ sanitize", "link": "https://www.homedepot.com/p/GE-24-in-Built-In-Tall-Tub-Top-Control-Stainless-Steel-Dishwasher-w-Sanitize-Dry-Boost-52-dBA-GDT550PYRFS/317761281", "image": "dishwasher.jpg" },
     { "name": "Cabinets", "note": "Northpoint- Catalina -Polar White", "link": "https://www.hardwareresources.com/northpoint-cabinets", "image": "cabinets.jpg" },
     { "name": "Countertop", "note": "", "link": "", "image": "" },
-    { "name": "Ceiling Fans", "note": "Progress Trevina II 52\" Fan", "link": "https://progresslighting.com/products/trevina-ii-collection-52in-three-blade-ceiling-fan-p2553?_pos=1&_sid=1bca45a81&_ss=r&variant=46578354749692", "image": "fans.jpg" },
-    { "name": "Vanity Lights", "note": "Progress Merry Matte Black", "link": "https://progresslighting.com/products/merry-collection-three-light-etched-white-glass-bath-vanity-wall-light-p300329?_pos=2&_sid=6f98a8e1e&_ss=r&variant=46578296324348", "image": "vanity-light.jpg" },
-    { "name": "Exterior Lights", "note": "Progress Whitmore Matte Black", "link": "https://progresslighting.com/products/whitmire-collection-one-light-with-clear-seeded-glass-outdoor-wall-lantern-light-p560282?variant=46664171356412", "image": "exterior-lights.jpg" },
-    { "name": "Dining Room Light", "note": "Progress Replay ", "link": "https://progresslighting.com/products/replay-collection-five-light-etched-white-glass-chandelier-light-p4319?variant=46578284855548", "image": "dining-room-light.jpg" },
-    { "name": "Front Door Hardware", "note": "Schlage Century with Latitude Handle", "link": "https://www.homedepot.com/p/Schlage-Century-Matte-Black-Single-Cylinder-Door-Handleset-with-Latitude-Handle-F60-G-CEN-622-LAT/319938200", "image": "front-door-hardware.jpg" },
-    { "name": "Door Hardware", "note": "Schlage Latitude Matte Black", "link": "https://www.homedepot.com/p/Schlage-Latitude-Matte-Black-Keyed-Entry-Door-Handle-F51A-G-LAT-622/310640472", "image": "door-hardware.jpg" },
-    { "name": "Towel Ring", "note": "Gatco Latitude II -Matte Black", "link": "https://www.homedepot.com/p/Gatco-Latitude-II-Towel-Ring-in-Matte-Black-4242MX/300147451", "image": "towel-ring.jpg" },
-    { "name": "Towel Bar", "note": "Glacier Bay Dorind- Matte Black", "link": "https://www.homedepot.com/p/Glacier-Bay-Dorind-24-in-Towel-Bar-in-Matte-Black-20202-0210H/322302855", "image": "towel-bar.jpg" },
-    { "name": "Cabinet Hardware", "note": "5-1/6\" Matte Black Cabinet Pull", "link": "https://www.homedepot.com/p/Franklin-Brass-30-Pack-Simple-Bar-5-1-16-in-128-mm-Modern-Matte-Black-Cabinet-Drawer-Pulls-P46642K-FB-B2/321239025", "image": "cabinet-hardware.jpg" }
+    { "name": "Ceiling Fans", "note": "Progress Trevina II 52\" Fan", "link": "https://progresslighting.com/products/trevina-ii-collection-52in-three-blade-ceiling-fan-p2553", "image": "fans.jpg" },
+    { "name": "Vanity Lights", "note": "Progress Merry Matte Black", "link": "https://progresslighting.com/products/merry-collection-three-light-etched-white-glass-bath-vanity-wall-light-p300329", "image": "vanity-light.jpg" },
+    { "name": "Exterior Lights", "note": "Progress Whitmore Matte Black", "link": "https://progresslighting.com/products/whitmire-collection-one-light-with-clear-seeded-glass-outdoor-wall-lantern-light-p560282", "image": "exterior-lights.jpg" },
+    { "name": "Dining Room Light", "note": "Progress Replay", "link": "https://progresslighting.com/products/replay-collection-five-light-etched-white-glass-chandelier-light-p4319", "image": "dining-room-light.jpg" },
+    { "name": "Front Door Hardware", "note": "Schlage Century with Latitude Handle", "link": "https://www.homedepot.com/p/319938200", "image": "front-door-hardware.jpg" },
+    { "name": "Door Hardware", "note": "Schlage Latitude Matte Black", "link": "https://www.homedepot.com/p/310640472", "image": "door-hardware.jpg" },
+    { "name": "Towel Ring", "note": "Gatco Latitude II -Matte Black", "link": "https://www.homedepot.com/p/300147451", "image": "towel-ring.jpg" },
+    { "name": "Towel Bar", "note": "Glacier Bay Dorind- Matte Black", "link": "https://www.homedepot.com/p/322302855", "image": "towel-bar.jpg" },
+    { "name": "Cabinet Hardware", "note": "5-1/6\" Matte Black Cabinet Pull", "link": "https://www.homedepot.com/p/321239025", "image": "cabinet-hardware.jpg" }
   ]</script>
 
   <script>
-    /* ---------- Helpers ---------- */
+    /* ------------------ Utility: robust asset finder ------------------ */
+    const EXT_LIST = [".jpg",".jpeg",".png",".JPG",".JPEG",".PNG"];
+
+    function withExtVariants(path){
+      // if already has an extension, try it plus alternates swapped
+      const dot = path.lastIndexOf(".");
+      if (dot > 0) {
+        const base = path.slice(0,dot);
+        const origExt = path.slice(dot);
+        const alts = [origExt, ...EXT_LIST.filter(e => e.toLowerCase() !== origExt.toLowerCase())];
+        return alts.map(e => base + e);
+      }
+      return EXT_LIST.map(e => path + e);
+    }
+
+    function uniq(arr){ return [...new Set(arr)]; }
+
+    function candidatePaths(input){
+      // Accept "foo", "foo.jpg", "selections/foo.JPG" etc.
+      if (!input) return [];
+      const trimmed = input.trim();
+
+      const hasSlash = trimmed.includes("/");
+      const nameOnly = trimmed.split("/").pop();
+      const noExtVariants = uniq([
+        trimmed.replace(/\\/g,"/"),
+        trimmed.toLowerCase(),
+        nameOnly,
+        nameOnly.toLowerCase()
+      ]);
+
+      // locations to try: exact dir, root, selections/
+      const bases = [];
+      noExtVariants.forEach(b=>{
+        if (hasSlash) bases.push(b);
+        bases.push(b);
+        if (!b.startsWith("selections/")) bases.push("selections/" + b);
+      });
+
+      // expand extensions for each base
+      const expanded = [];
+      bases.forEach(b => expanded.push(...withExtVariants(b)));
+
+      // plus: if original had an extension, include it first (exact)
+      if (/\.[a-zA-Z]+$/.test(trimmed)) {
+        expanded.unshift(trimmed);
+        if (!trimmed.startsWith("selections/")) expanded.unshift("selections/" + trimmed);
+      }
+
+      return uniq(expanded);
+    }
+
+    function loadBestImage(imgEl, desiredPath, fallbackLabel){
+      const tries = candidatePaths(desiredPath);
+      let i=0;
+
+      function tryNext(){
+        if (i>=tries.length) {
+          // show placeholder
+          const holder = document.createElement('div');
+          holder.className='placeholder';
+          holder.textContent = fallbackLabel || 'Image';
+          imgEl.replaceWith(holder);
+          return;
+        }
+        const src = tries[i++];
+        imgEl.src = src;
+        imgEl.onload = ()=>{}; // success
+        imgEl.onerror = tryNext;
+      }
+      tryNext();
+    }
+
+    /* ------------------ Section routing ------------------ */
     function showSection(id){
-      document.querySelectorAll('.container section').forEach(s => s.classList.remove('active'));
-      const el = document.getElementById(id);
-      if (el) el.classList.add('active');
-      if (history.pushState) { history.pushState(null, "", "#" + id); }
+      document.querySelectorAll('.container section').forEach(s=>s.classList.remove('active'));
+      const el = document.getElementById(id); if (el) el.classList.add('active');
+      if (history.pushState) history.pushState(null,"","#"+id);
     }
 
-    function slugify(t){
-      return (t || "")
-        .toLowerCase()
-        .replace(/&/g,' and ')
-        .replace(/[^a-z0-9]+/g,'-')
-        .replace(/-+/g,'-')
-        .replace(/^-|-$/g,'');
-    }
-
-    /* Build <img> – honors explicit path, plus tries same name under /selections/, then falls back extensions */
-    function buildSmartImg(name, explicitPath){
-      const exts = ['.jpg','.jpeg','.png','.JPG','.JPEG','.PNG'];
-      const img = document.createElement('img');
-      img.loading = 'lazy';
-      img.alt = name || '';
-
-      // If an explicit path is provided, use that first.
-      if (explicitPath && explicitPath.trim()){
-        const p = explicitPath.trim();
-        const bases = [p, 'selections/' + p];
-        return tryBases(bases, [], name);
-      }
-
-      // Otherwise, use slugify logic.
-      const base = slugify(name);
-      const bases = ['selections/' + base, base];
-      return tryBases(bases, exts, name);
-    }
-
-    function tryBases(bases, exts, alt){
-      const img = document.createElement('img');
-      img.loading = 'lazy';
-      img.alt = alt || '';
-      let i = 0, j = 0;
-      function next(){
-        if (i >= bases.length) return fail();
-        // If explicit path was provided, no extensions were passed.
-        const path = exts.length === 0 ? bases[i] : bases[i] + exts[j];
-        img.src = path;
-
-        img.onload = () => { /* Success */ };
-        img.onerror = () => {
-          if (exts.length === 0 || j >= exts.length - 1) {
-            i++;
-            j = 0;
-          } else {
-            j++;
-          }
-          next();
-        };
-      }
-      function fail(){
-        const holder = document.createElement('div');
-        holder.className = 'placeholder';
-        holder.textContent = alt || 'Selection';
-        if (img.parentElement){ img.parentElement.replaceChildren(holder); }
-      }
-      next();
-      return img;
-    }
-
+    /* ------------------ Selections render ------------------ */
     function renderSelections(items){
       const gallery = document.getElementById('selectionsGallery');
-      const list    = document.getElementById('selectionsList');
+      const list = document.getElementById('selectionsList');
+      gallery.innerHTML=''; list.innerHTML='';
 
-      gallery.innerHTML = ''; // Clear previous content
-      list.innerHTML = '';
-
-      items.forEach(it => {
-        const name = it.name || '';
+      items.forEach(it=>{
+        const name = it.name || 'Selection';
         const note = it.note || '';
-        let link = (it.link || '').trim();
-        if (link && !/^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(link) && /^[\w.-]+\.[a-zA-Z]{2,}(\/.*)?$/.test(link)) {
-          link = 'https://' + link;
-        }
+        let link = (it.link||'').trim();
+        if (link && !/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(link)) link = 'https://' + link;
 
-        // Create the card element for the gallery
-        const outer = document.createElement('article');
-        outer.className = 'card';
-        if (link) { outer.addEventListener('click',()=>window.open(link,'_blank','noopener')); }
+        const card = document.createElement('article'); card.className='card';
+        if (link) card.addEventListener('click',()=>window.open(link,'_blank','noopener'));
 
-        // Create the thumbnail with image
-        const thumb = document.createElement('div');
-        thumb.className = 'thumb';
-        const imgEl = buildSmartImg(name, (it.image||'').trim() || null);
-        thumb.appendChild(imgEl);
+        const thumb = document.createElement('div'); thumb.className='thumb';
+        const img = document.createElement('img'); img.loading='lazy'; img.alt=name;
+        thumb.appendChild(img);
+        const ov = document.createElement('div'); ov.className='overlay'; ov.textContent = note || 'Details';
+        thumb.appendChild(ov);
+        card.appendChild(thumb);
 
-        const overlay = document.createElement('div');
-        overlay.className = 'overlay';
-        overlay.textContent = note || 'Details';
-        thumb.appendChild(overlay);
+        const info = document.createElement('div'); info.className='info';
+        info.innerHTML = `<p class="title">${name}</p>${link?`<div class="links"><a href="${link}" target="_blank" rel="noopener">Details</a></div>`:''}`;
+        card.appendChild(info);
+        gallery.appendChild(card);
 
-        outer.appendChild(thumb);
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${name}</strong>${note?` — ${note}`:''}${link?` <a href="${link}" target="_blank" rel="noopener">(details)</a>`:''}`;
+        list.appendChild(li);
 
-        // Create the info section
-        const info = document.createElement('div');
-        info.className = 'info';
-        info.innerHTML = `
-          <p class="title">${name}</p>
-          <div class="links">${link ? `<a href="${link}" target="_blank" rel="noopener">Details</a>` : ``}</div>
-        `;
-        outer.appendChild(info);
-
-        gallery.appendChild(outer);
-
-        // Create the list item
-        const listItem = document.createElement('li');
-        const listNote = note ? ` — ${note}` : '';
-        const listLink = link ? ` <a href="${link}" target="_blank" rel="noopener">(details)</a>` : '';
-        listItem.innerHTML = `<strong>${name}</strong>${listNote}${listLink}`;
-        list.appendChild(listItem);
+        const desired = (it.image||'').trim() || name;
+        loadBestImage(img, desired, name);
       });
     }
 
-    function parseInline(){
-      try{
-        const raw = document.getElementById('selections-data').textContent.trim();
-        if (!raw) return null;
-        const json = JSON.parse(raw);
-        return Array.isArray(json) && json.length ? json : null;
-      }catch(e){ console.warn('Inline selections JSON invalid:', e); return null; }
-    }
-
+    /* ------------------ Boot ------------------ */
     document.addEventListener('DOMContentLoaded', ()=>{
-      const hash = location.hash ? location.hash.substring(1) : null;
-      if (hash && document.getElementById(hash)) showSection(hash);
-      document.querySelectorAll('a[data-section]').forEach(a => {
-        a.addEventListener('click', (e) => { e.preventDefault(); showSection(a.getAttribute('data-section')); });
+      // Nav clicks
+      document.querySelectorAll('a[data-section]').forEach(a=>{
+        a.addEventListener('click',e=>{e.preventDefault();showSection(a.getAttribute('data-section'));});
       });
+      if (location.hash) {
+        const id = location.hash.slice(1);
+        if (document.getElementById(id)) showSection(id);
+      }
 
-      const inline = parseInline();
-      if (inline) { renderSelections(inline); return; }
+      // Robust PDF src
+      const pdfName = 'Talavera Homes Homeowner Handbook.pdf';
+      const pdfEncoded = encodeURI(pdfName);
+      document.getElementById('handbookFrame').src = pdfEncoded + '#view=FitH&toolbar=1&navpanes=0';
+      document.getElementById('handbookLink').href = pdfEncoded;
 
-      // Fallback if inline is ever empty
-      const DEFAULTS = ["Exterior Paint","Exterior Trim","Interior Paint","Interior Trim Paint","Stain","Carpet","LVP","Wall tile","Backsplash","Range","Microwave","Dishwasher","Cabinets","Countertop","Ceiling Fans","Vanity Lights","Exterior Lights","Dining Room Light","Front Door Hardware","Door Hardware","Towel Ring","Towel Bar","Cabinet Hardware"]
-        .map(n=>({name:n,note:"",link:"",image:""}));
-      renderSelections(DEFAULTS);
+      // Robust logo + hero image
+      const logoImg = document.getElementById('logoImg');
+      loadBestImage(logoImg, 'Gold_Talavera_Logo.png', 'Talavera Homes');
+
+      // Hero background (tries 195410.jpg/.jpeg/.png in root or /selections)
+      const hero = document.getElementById('hero');
+      (function setHero(){
+        const candidates = (function(){
+          const c1 = candidatePaths('195410.jpeg');
+          const c2 = candidatePaths('195410');
+          return [...new Set([...c1, ...c2])];
+        })();
+        let i=0;
+        function next(){
+          if (i>=candidates.length) return;
+          const test = new Image();
+          const src = candidates[i++]; test.src = src;
+          test.onload = ()=>{ hero.style.backgroundImage = `url('${src}')`; };
+          test.onerror = next;
+        }
+        next();
+      })();
+
+      // Selections
+      try{
+        const arr = JSON.parse(document.getElementById('selections-data').textContent.trim()||'[]');
+        renderSelections(Array.isArray(arr)?arr:[]);
+      }catch(e){ renderSelections([]); }
     });
   </script>
 </body>
 </html>
+
