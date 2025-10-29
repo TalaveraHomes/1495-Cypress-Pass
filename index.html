@@ -60,8 +60,6 @@
     .title{font-weight:700;color:var(--brand);margin:0 0 6px}
     .links a{font-size:.92rem;color:var(--brand);text-decoration:none;border-bottom:1px dashed var(--brand)}
     .links a:hover{color:var(--nav);border-bottom-color:var(--nav)}
-    .selections-list{margin-top:1.25rem;border-top:1px solid var(--line);padding-top:1rem}
-    .selections-list li{padding:.4rem 0;border-bottom:1px dashed var(--line)}
   </style>
 </head>
 <body>
@@ -115,9 +113,6 @@
       </div>
 
       <div id="selectionsGallery" class="gallery"></div>
-      <ul id="selectionsList" class="selections-list"></ul>
-      <p class="muted" style="margin-top:1rem;">You can place images in the repo **root** or in **/selections/**. Any of
-        <code>.jpg</code>, <code>.jpeg</code>, or <code>.png</code> (any capitalization) will be found automatically.</p>
     </section>
 
     <section id="tips"><h2>Helpful Tips</h2><p>Coming soon.</p></section>
@@ -137,7 +132,7 @@
 
   <footer>&copy; 2025 Talavera Homes. All rights reserved.</footer>
 
-  <!-- Your selections data (filenames can be any case and any of .jpg/.jpeg/.png) -->
+  <!-- Your selections data -->
   <script type="application/json" id="selections-data">[
     { "name": "Exterior Paint", "note": "Sherwin Williams SW7005 Pure White", "link": "https://www.sherwin-williams.com/en-us/color/color-family/white-paint-colors/sw7005-pure-white", "image": "exterior-paint.jpg" },
     { "name": "Exterior Trim", "note": "Sherwin Williams SW7005 Pure White", "link": "https://www.sherwin-williams.com/en-us/color/color-family/white-paint-colors/sw7005-pure-white", "image": "exterior-trim.jpg" },
@@ -148,11 +143,10 @@
     { "name": "LVP", "note": "Shaw Optimum 512C Plus- Spalted Maple", "link": "https://shawbuilderflooringsf.com/pdp/resilient/optimum-512c-plus/spalted-maple/VE210-02084", "image": "lvp.jpg" },
     { "name": "Wall tile", "note": "Emser Cabo- Shore", "link": "https://www.emser.com/products/cabo?variant=39461269110897", "image": "Wall-tile.jpg" },
     { "name": "Backsplash", "note": "Emser Catch Matte- Ice", "link": "https://www.emser.com/products/catch-matte?variant=39763678232689", "image": "Backsplash.jpg" },
-    { "name": "Range", "note": "GE 30\" 4 burner SS Range", "link": "https://www.homedepot.com/p/GE-30-in-4-Burner-Element-Free-Standing-Electric-Range-in-Stainless-Steel-w-Stainless-Knobs-GRF40HSVSS/329011820", "image": "range.jpg" },
-    { "name": "Microwave", "note": "GE 1.6 cu. Ft. SS Microwave", "link": "https://www.homedepot.com/p/GE-1-6-cu-ft-Over-the-Range-Microwave-in-Stainless-Steel-JVM3160RFSS/204394354", "image": "microwave.jpg" },
-    { "name": "Dishwasher", "note": "GE Built-in Tall Tub SS w/ sanitize", "link": "https://www.homedepot.com/p/GE-24-in-Built-In-Tall-Tub-Top-Control-Stainless-Steel-Dishwasher-w-Sanitize-Dry-Boost-52-dBA-GDT550PYRFS/317761281", "image": "dishwasher.jpg" },
+    { "name": "Range", "note": "GE 30\" 4 burner SS Range", "link": "https://www.homedepot.com/p/329011820", "image": "range.jpg" },
+    { "name": "Microwave", "note": "GE 1.6 cu. Ft. SS Microwave", "link": "https://www.homedepot.com/p/204394354", "image": "microwave.jpg" },
+    { "name": "Dishwasher", "note": "GE Built-in Tall Tub SS w/ sanitize", "link": "https://www.homedepot.com/p/317761281", "image": "dishwasher.jpg" },
     { "name": "Cabinets", "note": "Northpoint- Catalina -Polar White", "link": "https://www.hardwareresources.com/northpoint-cabinets", "image": "cabinets.jpg" },
-    { "name": "Countertop", "note": "", "link": "", "image": "" },
     { "name": "Ceiling Fans", "note": "Progress Trevina II 52\" Fan", "link": "https://progresslighting.com/products/trevina-ii-collection-52in-three-blade-ceiling-fan-p2553", "image": "fans.jpg" },
     { "name": "Vanity Lights", "note": "Progress Merry Matte Black", "link": "https://progresslighting.com/products/merry-collection-three-light-etched-white-glass-bath-vanity-wall-light-p300329", "image": "vanity-light.jpg" },
     { "name": "Exterior Lights", "note": "Progress Whitmore Matte Black", "link": "https://progresslighting.com/products/whitmire-collection-one-light-with-clear-seeded-glass-outdoor-wall-lantern-light-p560282", "image": "exterior-lights.jpg" },
@@ -165,167 +159,77 @@
   ]</script>
 
   <script>
-    /* ------------------ Utility: robust asset finder ------------------ */
-    const EXT_LIST = [".jpg",".jpeg",".png",".JPG",".JPEG",".PNG"];
-
-    function withExtVariants(path){
-      // if already has an extension, try it plus alternates swapped
-      const dot = path.lastIndexOf(".");
-      if (dot > 0) {
-        const base = path.slice(0,dot);
-        const origExt = path.slice(dot);
-        const alts = [origExt, ...EXT_LIST.filter(e => e.toLowerCase() !== origExt.toLowerCase())];
-        return alts.map(e => base + e);
-      }
-      return EXT_LIST.map(e => path + e);
-    }
-
-    function uniq(arr){ return [...new Set(arr)]; }
-
-    function candidatePaths(input){
-      // Accept "foo", "foo.jpg", "selections/foo.JPG" etc.
-      if (!input) return [];
-      const trimmed = input.trim();
-
-      const hasSlash = trimmed.includes("/");
-      const nameOnly = trimmed.split("/").pop();
-      const noExtVariants = uniq([
-        trimmed.replace(/\\/g,"/"),
-        trimmed.toLowerCase(),
-        nameOnly,
-        nameOnly.toLowerCase()
-      ]);
-
-      // locations to try: exact dir, root, selections/
-      const bases = [];
-      noExtVariants.forEach(b=>{
-        if (hasSlash) bases.push(b);
-        bases.push(b);
-        if (!b.startsWith("selections/")) bases.push("selections/" + b);
-      });
-
-      // expand extensions for each base
-      const expanded = [];
-      bases.forEach(b => expanded.push(...withExtVariants(b)));
-
-      // plus: if original had an extension, include it first (exact)
-      if (/\.[a-zA-Z]+$/.test(trimmed)) {
-        expanded.unshift(trimmed);
-        if (!trimmed.startsWith("selections/")) expanded.unshift("selections/" + trimmed);
-      }
-
-      return uniq(expanded);
-    }
-
+    /* Simplified renderSelections (no list) */
     function loadBestImage(imgEl, desiredPath, fallbackLabel){
-      const tries = candidatePaths(desiredPath);
+      const tries = [desiredPath, "selections/" + desiredPath];
       let i=0;
-
-      function tryNext(){
-        if (i>=tries.length) {
-          // show placeholder
-          const holder = document.createElement('div');
+      function next(){
+        if(i>=tries.length){
+          const holder=document.createElement('div');
           holder.className='placeholder';
-          holder.textContent = fallbackLabel || 'Image';
+          holder.textContent=fallbackLabel||'Image';
           imgEl.replaceWith(holder);
           return;
         }
-        const src = tries[i++];
-        imgEl.src = src;
-        imgEl.onload = ()=>{}; // success
-        imgEl.onerror = tryNext;
+        imgEl.src=tries[i++];
+        imgEl.onerror=next;
       }
-      tryNext();
+      next();
     }
 
-    /* ------------------ Section routing ------------------ */
     function showSection(id){
       document.querySelectorAll('.container section').forEach(s=>s.classList.remove('active'));
-      const el = document.getElementById(id); if (el) el.classList.add('active');
-      if (history.pushState) history.pushState(null,"","#"+id);
+      const el=document.getElementById(id);
+      if(el) el.classList.add('active');
+      history.pushState(null,"","#"+id);
     }
 
-    /* ------------------ Selections render ------------------ */
     function renderSelections(items){
-      const gallery = document.getElementById('selectionsGallery');
-      const list = document.getElementById('selectionsList');
-      gallery.innerHTML=''; list.innerHTML='';
-
+      const gallery=document.getElementById('selectionsGallery');
+      gallery.innerHTML='';
       items.forEach(it=>{
-        const name = it.name || 'Selection';
-        const note = it.note || '';
-        let link = (it.link||'').trim();
-        if (link && !/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(link)) link = 'https://' + link;
+        const name=it.name||'Selection';
+        const note=it.note||'';
+        let link=(it.link||'').trim();
+        if(link && !/^https?:\/\//.test(link)) link='https://'+link;
 
-        const card = document.createElement('article'); card.className='card';
-        if (link) card.addEventListener('click',()=>window.open(link,'_blank','noopener'));
+        const card=document.createElement('article');card.className='card';
+        if(link) card.addEventListener('click',()=>window.open(link,'_blank','noopener'));
 
-        const thumb = document.createElement('div'); thumb.className='thumb';
-        const img = document.createElement('img'); img.loading='lazy'; img.alt=name;
+        const thumb=document.createElement('div');thumb.className='thumb';
+        const img=document.createElement('img');img.loading='lazy';img.alt=name;
         thumb.appendChild(img);
-        const ov = document.createElement('div'); ov.className='overlay'; ov.textContent = note || 'Details';
+        const ov=document.createElement('div');ov.className='overlay';ov.textContent=note||'Details';
         thumb.appendChild(ov);
         card.appendChild(thumb);
 
-        const info = document.createElement('div'); info.className='info';
-        info.innerHTML = `<p class="title">${name}</p>${link?`<div class="links"><a href="${link}" target="_blank" rel="noopener">Details</a></div>`:''}`;
+        const info=document.createElement('div');info.className='info';
+        info.innerHTML=`<p class="title">${name}</p>${link?`<div class="links"><a href="${link}" target="_blank" rel="noopener">Details</a></div>`:''}`;
         card.appendChild(info);
         gallery.appendChild(card);
-
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${name}</strong>${note?` — ${note}`:''}${link?` <a href="${link}" target="_blank" rel="noopener">(details)</a>`:''}`;
-        list.appendChild(li);
-
-        const desired = (it.image||'').trim() || name;
-        loadBestImage(img, desired, name);
+        loadBestImage(img,(it.image||'').trim()||name,name);
       });
     }
 
-    /* ------------------ Boot ------------------ */
-    document.addEventListener('DOMContentLoaded', ()=>{
-      // Nav clicks
+    document.addEventListener('DOMContentLoaded',()=>{
       document.querySelectorAll('a[data-section]').forEach(a=>{
         a.addEventListener('click',e=>{e.preventDefault();showSection(a.getAttribute('data-section'));});
       });
-      if (location.hash) {
-        const id = location.hash.slice(1);
-        if (document.getElementById(id)) showSection(id);
-      }
 
-      // Robust PDF src
-      const pdfName = 'Talavera Homes Homeowner Handbook.pdf';
-      const pdfEncoded = encodeURI(pdfName);
-      document.getElementById('handbookFrame').src = pdfEncoded + '#view=FitH&toolbar=1&navpanes=0';
-      document.getElementById('handbookLink').href = pdfEncoded;
+      const pdfName="Talavera Homes Homeowner Handbook.pdf";
+      document.getElementById('handbookFrame').src=encodeURI(pdfName)+'#view=FitH';
+      document.getElementById('handbookLink').href=encodeURI(pdfName);
 
-      // Robust logo + hero image
-      const logoImg = document.getElementById('logoImg');
-      loadBestImage(logoImg, 'Gold_Talavera_Logo.png', 'Talavera Homes');
+      const logo=document.getElementById('logoImg');
+      loadBestImage(logo,'Gold_Talavera_Logo.png','Talavera Homes');
 
-      // Hero background (tries 195410.jpg/.jpeg/.png in root or /selections)
-      const hero = document.getElementById('hero');
-      (function setHero(){
-        const candidates = (function(){
-          const c1 = candidatePaths('195410.jpeg');
-          const c2 = candidatePaths('195410');
-          return [...new Set([...c1, ...c2])];
-        })();
-        let i=0;
-        function next(){
-          if (i>=candidates.length) return;
-          const test = new Image();
-          const src = candidates[i++]; test.src = src;
-          test.onload = ()=>{ hero.style.backgroundImage = `url('${src}')`; };
-          test.onerror = next;
-        }
-        next();
-      })();
+      const hero=document.getElementById('hero');
+      const heroImg=new Image();
+      heroImg.src='195410.jpeg';
+      heroImg.onload=()=>hero.style.backgroundImage=`url('${heroImg.src}')`;
 
-      // Selections
-      try{
-        const arr = JSON.parse(document.getElementById('selections-data').textContent.trim()||'[]');
-        renderSelections(Array.isArray(arr)?arr:[]);
-      }catch(e){ renderSelections([]); }
+      const arr=JSON.parse(document.getElementById('selections-data').textContent.trim());
+      renderSelections(arr);
     });
   </script>
 </body>
