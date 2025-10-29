@@ -132,7 +132,7 @@
 
   <footer>&copy; 2025 Talavera Homes. All rights reserved.</footer>
 
-  <!-- Your selections data -->
+  <!-- Updated selections data -->
   <script type="application/json" id="selections-data">[
     { "name": "Exterior Paint", "note": "Sherwin Williams SW7005 Pure White", "link": "https://www.sherwin-williams.com/en-us/color/color-family/white-paint-colors/sw7005-pure-white", "image": "exterior-paint.jpg" },
     { "name": "Exterior Trim", "note": "Sherwin Williams SW7005 Pure White", "link": "https://www.sherwin-williams.com/en-us/color/color-family/white-paint-colors/sw7005-pure-white", "image": "exterior-trim.jpg" },
@@ -143,6 +143,7 @@
     { "name": "LVP", "note": "Shaw Optimum 512C Plus- Spalted Maple", "link": "https://shawbuilderflooringsf.com/pdp/resilient/optimum-512c-plus/spalted-maple/VE210-02084", "image": "lvp.jpg" },
     { "name": "Wall tile", "note": "Emser Cabo- Shore", "link": "https://www.emser.com/products/cabo?variant=39461269110897", "image": "Wall-tile.jpg" },
     { "name": "Backsplash", "note": "Emser Catch Matte- Ice", "link": "https://www.emser.com/products/catch-matte?variant=39763678232689", "image": "Backsplash.jpg" },
+    { "name": "Refrigerator", "note": "GE 27 cu. ft. French Door Refrigerator", "link": "https://www.homedepot.com/p/GE-27-cu-ft-French-Door-Refrigerator-in-Fingerprint-Resistant-Stainless-with-Internal-Dispenser-ENERGY-STAR-GNE27JYMFS/320243591", "image": "refrigerator.jpg" },
     { "name": "Range", "note": "GE 30\" 4 burner SS Range", "link": "https://www.homedepot.com/p/329011820", "image": "range.jpg" },
     { "name": "Microwave", "note": "GE 1.6 cu. Ft. SS Microwave", "link": "https://www.homedepot.com/p/204394354", "image": "microwave.jpg" },
     { "name": "Dishwasher", "note": "GE Built-in Tall Tub SS w/ sanitize", "link": "https://www.homedepot.com/p/317761281", "image": "dishwasher.jpg" },
@@ -159,9 +160,8 @@
   ]</script>
 
   <script>
-    /* Simplified renderSelections (no list) */
     function loadBestImage(imgEl, desiredPath, fallbackLabel){
-      const tries = [desiredPath, "selections/" + desiredPath];
+      const tries=[desiredPath,"selections/"+desiredPath];
       let i=0;
       function next(){
         if(i>=tries.length){
@@ -200,38 +200,4 @@
         const img=document.createElement('img');img.loading='lazy';img.alt=name;
         thumb.appendChild(img);
         const ov=document.createElement('div');ov.className='overlay';ov.textContent=note||'Details';
-        thumb.appendChild(ov);
-        card.appendChild(thumb);
-
-        const info=document.createElement('div');info.className='info';
-        info.innerHTML=`<p class="title">${name}</p>${link?`<div class="links"><a href="${link}" target="_blank" rel="noopener">Details</a></div>`:''}`;
-        card.appendChild(info);
-        gallery.appendChild(card);
-        loadBestImage(img,(it.image||'').trim()||name,name);
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded',()=>{
-      document.querySelectorAll('a[data-section]').forEach(a=>{
-        a.addEventListener('click',e=>{e.preventDefault();showSection(a.getAttribute('data-section'));});
-      });
-
-      const pdfName="Talavera Homes Homeowner Handbook.pdf";
-      document.getElementById('handbookFrame').src=encodeURI(pdfName)+'#view=FitH';
-      document.getElementById('handbookLink').href=encodeURI(pdfName);
-
-      const logo=document.getElementById('logoImg');
-      loadBestImage(logo,'Gold_Talavera_Logo.png','Talavera Homes');
-
-      const hero=document.getElementById('hero');
-      const heroImg=new Image();
-      heroImg.src='195410.jpeg';
-      heroImg.onload=()=>hero.style.backgroundImage=`url('${heroImg.src}')`;
-
-      const arr=JSON.parse(document.getElementById('selections-data').textContent.trim());
-      renderSelections(arr);
-    });
-  </script>
-</body>
-</html>
-
+        thumb.appendC
